@@ -109,8 +109,33 @@ public class LaboonCoin {
      */
     
     public boolean validHash(int difficulty, int hash) {
-	// TODO - CHECK FOR VALID HASHES
-	return false;
+        System.out.println("[-] Valid Hash");
+        System.out.println("[-] Difficulty is " + difficulty + ", hash is " + hash);
+
+        // Convert the int to a hex String
+        String hex = Integer.toHexString(hash);
+
+        // Remove the 0x from the beginning of the string
+        hex = hex.substring(1,hex.length());
+
+
+        int counter = 0;
+        for (int i = 0; i < hex.length(); i++) {
+            if (hex.charAt(i) == '0') {
+                counter++;
+            } else {
+                break;
+            }
+        }
+
+        // Check how many zeroes we counted
+        if (counter >= difficulty) {
+            System.out.println("Hash is valid with " + counter + " zeroes.");
+            return true;
+        } else {
+            System.out.println("Hash is INVALID with " + counter + " zeroes");
+            return false;
+        }
     }
 
     /**
