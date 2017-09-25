@@ -82,4 +82,33 @@ public class LaboonCoinTest {
         int hashVal = _l.hash(data);
         assertEquals(hashVal, 0);
     }
+
+    @Test
+    public void testValidHashDifficulty3A() {
+        // 0x000fd98a is a known good value, 3 zeroes
+        int i = 0x000fd98a;
+        assertTrue(_l.validHash(3, i));
+    }
+
+    @Test
+    public void testValidHashDifficulty3B() {
+        // 0x000000d4 is a known good value, 6 zeroes
+        int i = 0x000000d4;
+        assertTrue(_l.validHash(3, i));
+    }
+
+    @Test
+    public void testInvalidHashDifficulty3A() {
+        // 0x098ab873 is a known bad value, 1 zero
+        int i = 0x098ab873;
+        assertFalse(_l.validHash(3, i));
+    }
+
+    @Test
+    public void testInvalidHashDifficulty3B() {
+        // 0xab000000 is a known bad value, 1 zero
+        int i = 0xab000000;
+        assertFalse(_l.validHash(3, i));
+    }
+
 }

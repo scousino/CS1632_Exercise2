@@ -112,33 +112,41 @@ public class LaboonCoin {
      */
     
     public boolean validHash(int difficulty, int hash) {
-        System.out.println("[-] Valid Hash");
-        System.out.println("[-] Difficulty is " + difficulty + ", hash is " + hash);
 
-        // Convert the int to a hex String
-        String hex = Integer.toHexString(hash);
+        if ((difficulty > 8) || (difficulty < 0)) {
+            System.out.println("[!] Invalid difficulty specified.");
+            System.exit(-1);
+        } else {
 
-        // Remove the 0x from the beginning of the string
-        hex = hex.substring(1,hex.length());
+            // Convert the int to a hex String
+            String hex = Integer.toHexString(hash);
+
+            // Pad the hex up to 8 digits long, max integer value.
+            int j = hex.length();
+            for (int i = 0; i < (8-j); i++) {
+                hex = "0" + hex;
+            }
+//            System.out.println("Hex is " + hex);
 
 
-        int counter = 0;
-        for (int i = 0; i < hex.length(); i++) {
-            if (hex.charAt(i) == '0') {
-                counter++;
+            int counter = 0;
+            for (int i = 0; i < hex.length(); i++) {
+                if (hex.charAt(i) == '0') {
+                    counter++;
+                } else {
+                    break;
+                }
+            }
+
+            // Check how many zeroes we counted
+            if (counter >= difficulty) {
+                return true;
             } else {
-                break;
+                return false;
             }
         }
 
-        // Check how many zeroes we counted
-        if (counter >= difficulty) {
-            System.out.println("Hash is valid with " + counter + " zeroes.");
-            return true;
-        } else {
-            System.out.println("Hash is INVALID with " + counter + " zeroes");
-            return false;
-        }
+        return false;
     }
 
     /**
