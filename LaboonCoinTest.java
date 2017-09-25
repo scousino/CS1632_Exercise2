@@ -59,5 +59,27 @@ public class LaboonCoinTest {
     }
 	    
     // TODO - PUT YOUR SIX TESTS HERE
-    
+
+    // hash() tests start here
+    @Test
+    public void testLaboonHash() {
+        String data = "laboon";
+        int hashVal = _l.hash(data);
+        assertEquals(hashVal, 1313179606);
+
+    }
+
+    @Test
+    public void testEmptyHash() {
+        String data = "";
+        int hashVal = _l.hash(data);
+        assertEquals(hashVal, 10000000);
+    }
+
+    @Test
+    public void testLongAsciiNullHash() {
+        String data = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+        int hashVal = _l.hash(data);
+        assertEquals(hashVal, 0);
+    }
 }

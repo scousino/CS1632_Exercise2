@@ -80,7 +80,10 @@ public class LaboonCoin {
      */
     
     public int hash(String data) {
-	// TODO - IMPLEMENT LABOONHASH
+    // TODO - IMPLEMENT LABOONHASH
+        if(data == null) {
+            data = "";
+        }
         char[] characters = data.toCharArray();
         int hash = 10000000;
         int charAsciiVal = 0;
